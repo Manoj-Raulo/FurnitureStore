@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+    
+    <div class="container mt-5">
+        
+                <form action="" method="post" name="fm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                        <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    Prooduct Name:
+                    <input type="text" name="pname" class="form-control"/>
+                    Category:
+                    <select id="cat" class="form-select" name="category" onclick="Start()">
+                        <option>Select Category</option>
+                        <option value="Sofa" >Sofa</option>
+                        <option value="Bed">Bed</option>
+                        <option value="Dining Table" >Dining Table</option>
+                        <option value="Wardrobe">Wardrobe</option>
+                        <option value="Coffee Table" >Coffee Table</option>
+                        <option value="Office Chair">Office Chair</option>
+                        <option value="Mattress" >Mattress</option>
+                        
+                    </select>
+                    Preference:
+                    <select id="preference" name="preference" class="form-select">
+                        <option >Select below Preferences</option>
+                        <option class="op"></option>
+                        <option class="op"></option>
+                        <option class="op"></option>
+                        <option class="op"></option>
+                        
+                    </select>
+                    Size:<input type="text" name="size" class="form-control"/>
+                    Material:<input type="text" name="material" class="form-control"/>
+                    Finish Type:<input type="text" name="finish type" class="form-control" />
+                    Dimension:<input type="text" name="dimension" class="form-control" />
+                    Colour:<input type="text" name="colour" class="form-control" />
+                    Brand:<input type="text" name="brand" class="form-control" />
+                    Features:<input type="text" name="features" class="form-control"/>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    description:<input type="desc" name="desc" class="form-control"/>
+                    Price:<input type="number" name="price" class="form-control" />
+                    Weight:<input type="text" name="weight" class="form-control"/>
+                    Stock:<input type="number" name="stock" class="form-control"/>
+                    Image1:<input type="file" name="img1" class="form-control" />
+                    image2:<input type="file" name="img2" class="form-control" />
+                    image3:<input type="file" name="img3" class="form-control" />
+                    image4:<input type="file" name="img4" class="form-control" />
+                    image5:<input type="file" name="img5" class="form-control" />
+                    <input type="submit" value="Add Product" class="btn btn-success mt-4" />
+                </div>
+                </div>
+                
+                </form>
+            
+       </div>
+    
+    
+    
+    
+       <script>
+             function Start(){
+                var category = document.fm.category.value;
+                console.log(category)
+    
+                if(category==='Sofa'){
+                    data = ['Living','Office']
+                     for(i=0;i<data.length;i++){
+                        var b = document.getElementsByClassName('op')
+                        b[i].innerHTML = data[i]
+                     
+                }
+                
+                }
+    
+                if (category==='Bed'){
+                    data = ['Bedroom']
+                     for(i=0;i<data.length;i++){
+                    var b = document.getElementsByClassName('op')
+                      b[i].innerHTML = data[i]
+                     b[i].setAttribute('value',data[i])
+                }
+
+                
+                
+             }
+             if (category==='Dining Table'){
+                    data = ['Living','Dining']
+                     for(i=0;i<data.length;i++){
+                    var b = document.getElementsByClassName('op')
+                      b[i].innerHTML = data[i]
+                     b[i].setAttribute('value',data[i])
+                }
+
+                
+                
+             }
+             if (category==='Wardrobe'){
+                    data = ['Living','Bedroom']
+                     for(i=0;i<data.length;i++){
+                    var b = document.getElementsByClassName('op')
+                      b[i].innerHTML = data[i]
+                     b[i].setAttribute('value',data[i])
+                }
+
+                
+                
+             }
+             if (category==='Coffee Table'){
+                    data = ['Living','Office']
+                     for(i=0;i<data.length;i++){
+                    var b = document.getElementsByClassName('op')
+                      b[i].innerHTML = data[i]
+                     b[i].setAttribute('value',data[i])
+                }
+
+                
+                
+             }
+             if (category==='Office Chair'){
+                    data = ['Office']
+                     for(i=0;i<data.length;i++){
+                    var b = document.getElementsByClassName('op')
+                      b[i].innerHTML = data[i]
+                     b[i].setAttribute('value',data[i])
+                }
+
+                
+                
+             }
+             if (category==='Mattress'){
+                    data = ['Bedroom']
+                     for(i=0;i<data.length;i++){
+                    var b = document.getElementsByClassName('op')
+                      b[i].innerHTML = data[i]
+                     b[i].setAttribute('value',data[i])
+                }
+
+                
+                
+             }
+            }
+             
+       </script>
+</body>

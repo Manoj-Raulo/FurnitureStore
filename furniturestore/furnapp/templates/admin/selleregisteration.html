@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <!-- font awesome link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *{
+
+font-family: 'Poppins', sans-serif;
+}
+body{
+    
+    background-color: #310e68;
+background-image: linear-gradient(316deg, #310e68 30%, #5f0f40 74%);
+
+
+
+}
+
+.container {
+        margin-top: 70px;
+        background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+        border-radius: 25px;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    h4{
+        margin-bottom: 20px;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="mt-5 ms-2">Register as<span class="text-success"> Seller</span></h1>
+            <div class="col-lg-6 col-md-6 col-sm-12 mt-3">
+                
+                
+                
+                
+                    <form action="{% url 'selleregisteration' %}" method="post">
+                        {% csrf_token %}
+                        <h4>Brand Name: <input type="text" name="bname" class="form-control" placeholder="Your brand name"></h4>
+                        <h4>E-mail: <input type="email" name="email" class="form-control" placeholder="Email ID associated to your brand"></h4>
+                        <h4>Contact: <input type="phone" name="contact" class="form-control" placeholder="Your registered Contact number"></h4>
+                        <h4>Shop Address: <input type="text" name="shopaddress" class="form-control" placeholder="Enter valid shop address"></h4>
+                        <h4>Brand Description: <input type="desc" name="branddesc" class="form-control" placeholder="Describe Your Brand"></h4>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <h4 class="text-success">{{message}}</h4>
+                        {% endfor %}
+                        {% endif %}
+                        <h4><input type="submit" value="Apply for Seller" class="btn btn-success mx-auto d-block mt-5 mb-5"></h4>
+                    </form>
+               
+                
+
+
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="d-none d-sm-block">
+                    
+                <img src="{% static 'images/Tradersignup.png' %}" style="width: 370px;height: 370px;border-radius: 5px;margin-top: 40px;" class="mx-auto d-block">
+                <h3 class="text-center"><span style="color: red">Become</span> <span style="color:#330867;">Seller</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

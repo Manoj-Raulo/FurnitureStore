@@ -1,0 +1,19 @@
+a {
+    font-size:15px;
+    font-weight:700
+  }
+  
+  .form-control {
+    outline:none !important;
+    box-shadow: none !important;
+  }
+  @media screen and (max-width:540px){
+    .centerOnMobile {
+      text-align:center
+    }
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 18px; /* Adjust the font size as needed */
+  }
+

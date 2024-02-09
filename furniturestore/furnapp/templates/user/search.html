@@ -1,0 +1,41 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Searching....{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <div class="row">
+        {% if sdata %}
+        {% for i in sdata %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mt-2 mb-2">
+            
+            <a href="{% url 'details' i.id i.category i.brand %}">
+            <!-- for category -->
+            
+                
+            <div class="shadow border"  style="height: 480px;">
+                <figure>
+                    <img src="{{i.img1.url}}" height="250px" width="100%">
+                </figure>
+                <figcaption class="ms-2">
+                    <h4 style="color: #1E453E;">{{i.brand}}</h4>
+                    <h6 class="text-secondary">{{i.pname}}</h6>
+                    <h4>
+                        <i class="fa-solid fa-indian-rupee-sign text-success"></i>  <span class="ms-1">{{i.price}}</span>
+                    </h4>
+                </figcaption>
+
+            </div>
+        </a>
+            
+
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1 style="background-color: aqua;color: red; text-align: center;margin-top: 250px;"></h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
