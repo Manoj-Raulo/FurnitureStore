@@ -4,6 +4,59 @@
 
 {% block content %}
 
-Brand Request
+<!-- table starts from here -->
+<div class="col-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Brand Details</h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Request No</th>
+                        <th scope="col">Brand Name</th>
+                        <th scope="col">Brand Description</th>
+                        <th scope="col">Shop Address</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col" colspan="2">Action</th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in brdata %}
+                    <tr>
+                        <th scope="row">{{i.id}}</th>
+                        <td>{{i.bname}}</td>
+                        <td>{{i.branddesc}}</td>
+                        <td>{{i.shopaddress}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.contact}}</td>
+                        <td>
+                            <form action="{% url 'sellersignup' %}" method="post">
+                                {% csrf_token %}
+                                <input type="number" value="{{i.id}}" name="id" class="d-none">
+                                <input type="text" value="{{i.bname}}" name="bname" class="d-none">
+                                <input type="desc" value="{{i.branddesc}}" name="branddesc" class="d-none">
+                                <input type="text" value="{{i.shopaddress}}" name="shopaddress" class="d-none">
+                                <input type="email" value="{{i.email}}" name="email" class="d-none">
+                                <input type="phone" value="{{i.contact}}" name="contact" class="d-none">
+                                <input type="submit" value="Accept" class="btn btn-success">
+                            </form>
+                        </td>
+                        <td><a href="#" class="btn btn-danger">Deny</a></td>
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- table starts from here -->
+
 
 {% endblock %}

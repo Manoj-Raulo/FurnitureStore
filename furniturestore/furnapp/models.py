@@ -25,6 +25,7 @@ class Product(models.Model):
     img3=models.ImageField(upload_to='media',null=True)
     img4=models.ImageField(upload_to='media',null=True)
     img5=models.ImageField(upload_to='media',null=True)
+    seller=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
     
 
@@ -52,6 +53,23 @@ class RegisterationRequest(models.Model):
     contact=models.BigIntegerField(null=True)
     shopaddress=models.CharField(max_length=300,null=True)
     branddesc=models.CharField(max_length=500,null=True)
+    Status=models.CharField(max_length=100,default='Pending')
+
+class SellerDetails(models.Model):
+    seller=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    brandlogo=models.ImageField(upload_to='brandlogo',null=True)
+    bname=models.CharField(max_length=100,null=True)
+    email = models.EmailField(null=True)
+    contact=models.BigIntegerField(null=True)
+    shopaddress=models.CharField(max_length=300,null=True)
+    branddesc=models.CharField(max_length=500,null=True)
+
+    
+
+
+
+    
+
 
 
     

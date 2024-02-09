@@ -44,10 +44,11 @@ urlpatterns = [
     path('preferpage/',views.Preferpage,name='preferpage'),
     path('adminpanel/',views.AdminSup,name='adminpanel'),
     path('sellerpanel/',views.SellerPanel,name='sellerpanel'),
-    path('sellerlogin/',views.SellerLogin,name='sellerlogin'),
-    # path('sellersignup/',views.SellerSignup,name='sellersignup'),
+    path('sellerlogin/',views.SellerLogin,name='sellerlogin'), 
     path('selleregisteration/',views.SellerRegisteration,name='selleregisteration'),
     path('requestbrand/<int:id>',views.BrandDetails,name='requestbrand'),
+    path('sellersignup/',views.SellerSignup,name='sellersignup'),
+    path('SellerProfile/',views.SellerProfile,name='SellerProfile')
 
 
     
@@ -65,3 +66,5 @@ urlpatterns = [
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.MEDIA2_URL,document_root=settings.MEDIA2_ROOT)
+
+urlpatterns += static(settings.MEDIA3_URL,document_root=settings.MEDIA3_ROOT)

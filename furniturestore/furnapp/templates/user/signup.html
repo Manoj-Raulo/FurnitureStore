@@ -27,14 +27,32 @@ background-image: linear-gradient(316deg, #310e68 30%, #5f0f40 74%);
 
 
 }
+
+.container{
+        margin-top: 70px;
+        background-color: #cdc1ff;
+        background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
+        border-radius: 25px;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    h4{
+        margin-bottom: 20px;
+    }
     </style>
 </head>
 <body>
-    <div class="container" style="margin-top: 100px;background-color: #cdc1ff;
-    background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);border-radius: 10px;">
+    <div class="container">
         <div class="row">
-            <h1 class="mt-5 ms-2">Signup to <span class="text-danger">WoodMagic Furnitures</span></h1>
-            <div class="col-lg-7 col-md-7 col-sm-12 mt-3">
+            <h1 class="mt-5 ms-2 mb-5">Signup to <span class="text-danger">WoodMagic Furnitures</span></h1>
+            <div class="col-lg-7 col-md-7 col-sm-12 mt-5">
                 
                     <form action="{% url 'signup' %}" method="post">
                         {% csrf_token %}
@@ -47,7 +65,7 @@ background-image: linear-gradient(316deg, #310e68 30%, #5f0f40 74%);
 
 
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-12">
+            <div class="col-lg-5 col-md-5 col-sm-12 mt-5">
                 <div class="d-none d-sm-block">
                 <img src="{% static 'images/Logo-1.png' %}" style="width: 320px;height: 400px;border-radius: 5px;margin-top: -80px;" class="mx-auto d-block">
             </div>

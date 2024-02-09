@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect,HttpResponse
 
-from .models import Product,Offers,Cart,Save,RegisterationRequest
+from .models import Product,Offers,Cart,Save,RegisterationRequest,SellerDetails
 
 from .forms import ProductForm
 
@@ -17,6 +17,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.core.mail import send_mail
 
 from django.conf import settings
+
+import uuid
 
 
 # Create your views here.
@@ -245,7 +247,14 @@ def AdminSup(request):
 
 def SellerPanel(request):
     if request.user.is_staff and request.user.is_authenticated:
-        return render(request,'admin/SellerPanel.html')
+        
+        sellerdata=SellerDetails.objects.filter(seller_id=request.user)
+        
+        
+        
+        userprofile=request.user
+        
+        return render(request,'admin/SellerPanel.html',{'sdata':sellerdata,'sname':userprofile})
     else:
         return HttpResponse("please signup or login")
 
@@ -269,19 +278,64 @@ def BrandDetails(request,id):
 
 
  
-# def SellerSignup(request):
-#     if request.method == "POST":
-#         uname=request.POST.get("uname")
-#         email=request.POST.get("email")
-#         password=request.POST.get("pass1")
-#         user=User.objects.create_user(uname,email,password)
-#         user.is_staff=True
+def SellerSignup(request):
+    if request.method=='POST':
+        bname=request.POST.get('bname')
+        email=request.POST.get('email')
+        rid=request.POST.get('id')
+        contact=request.POST.get('contact')
+        shopaddress=request.POST.get('shopaddress')
+        branddesc=request.POST.get('branddesc')
         
+
         
-#         user.save()
-#     return render(request,"admin/Sellersignup.html")
 
 
+
+        password=str(uuid.uuid4().hex)[:8:]
+        bname1=bname+"@sellar"
+
+        print(bname1,email,password)
+        user=User.objects.create_user(bname1,email,password)
+        user.is_staff=True
+        user.save()
+        subject=f"Update from WoodMagic Furnitures  {bname}"
+        message=f"""
+                Dear {bname},
+
+                Congratulations ! We are happy to inform you that you are now a seller on our website,
+                WoodMagic Firnitures. Welcome to our community. We are happy to have you on board.
+
+                We had go through your brand details, got the information about your all product and 
+                their quality.I believe that your brands would make a great impact and by working together,
+                we could offer our customers a unique and valuable experience.
+
+                Thank you for considering this opportunity. We look forward to the possibility of working with you.
+                Start adding your Products on Our Website.
+
+                these are your login credentials,
+                Username: {bname1}
+                Password: {password}(You can change this letter)
+
+                if you have any doubt you can contact on this number:-9876543210
+                you can also mail us on wmagicfurnitutres@gmail.com          
+                        
+                    
+                'Note: Please do not reply to this mail because it is auto-generated'
+                    
+                """
+        mail_from=settings.EMAIL_HOST_USER
+        mail_to=email
+
+        send_mail(subject,message,mail_from,[mail_to])
+        RegisterationRequest.objects.filter(pk=rid).update(Status='Accepted')
+        brand_id=(User.objects.filter(username=bname1).values_list('id',flat=True))
+        print(brand_id)
+
+        SellerDetails.objects.create(seller_id=brand_id[0],bname=bname,email=email,contact=contact,shopaddress=shopaddress,branddesc=branddesc)
+
+    return HttpResponse("Seller Added Successfully....")  
+    
 def SellerLogin(request):
     if request.method == "POST":
         username = request.POST.get("uname")
@@ -293,6 +347,11 @@ def SellerLogin(request):
             login(request, user)
             return HttpResponseRedirect("/sellerpanel/")
     return render(request,'admin/Sellerlogin.html')
+
+def SellerProfile(request):
+    sellerdata=SellerDetails.objects.filter(seller_id=request.user)
+    userprofile=request.user
+    return render(request,'admin/SellerProfile.html',{'sdata':sellerdata,'sname':userprofile})
 
 
 

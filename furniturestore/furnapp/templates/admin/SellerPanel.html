@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 
 <head>
@@ -34,17 +35,19 @@
 
 <body>
     <div class="container-fluid position-relative bg-white d-flex p-0">
+        
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3" style="background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);">
             <nav class="navbar bg-light navbar-light" style="background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);">
                 
                 <div class="d-flex align-items-center ms-2 mb-4 me-5">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="{% static 'images/Logo-1.png' %}"style="width: 50px; height: 50px;">
+                        <img class="rounded-circle" src="{% static 'images/Logo-1.png' %}"style="width: 60px; height: 60px;">
                     </div>
-                    <div class="ms-3">
+                    <div class="ms-3 mt-2">
                         <h6 class="mb-0">WoodMagic</h6>
                         <span>Furnitures</span>
+                        
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -74,9 +77,11 @@
                         </div>
                     </div>
                     <div>
-
-                        <a href="form.html" class="nav-item nav-link"><img src="{% static 'images/godrej.webp' %}" style="width:100% ;height: 100%;"></i></a>
-                        <div class="text-center"><h3>Your Brand</h3></div>
+                        {% for i in  sdata %}
+                        <a href="form.html" class="nav-item nav-link"><img src='{{ i.brandlogo.url }}' style="width:100% ;height: 100%;border-radius: 100px;"></a>
+                        <div class="text-center"><h3>seller</h3></div>
+                        {% endfor %}
+                                                
                     </div>
                     
                 </div>
@@ -124,11 +129,13 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="{% static 'images/seller.png' %}" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Seller</span>
+                            {% for i in  sdata %}
+                            <img class="rounded-circle me-lg-2" src="{{i.brandlogo.url}}" alt="" style="width: 40px; height: 40px;">
+                            {% endfor %}
+                            <span class="d-none d-lg-inline-flex">{{sname}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">My Profile</a>
+                            <a href="{% url 'SellerProfile' %}" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
                             <a href="#" class="dropdown-item">Log Out</a>
                         </div>
@@ -179,6 +186,80 @@
             </div>
             <!-- Sale & Revenue End -->
 
+            <!-- your recent sales -->
+            
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Your Recent Salse</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-dark">
+                                    <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Order ID</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>INV-0123</td>
+                                    <td>Jhon Doe</td>
+                                    <td>$123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Your Recent Sales End -->
+
             
 
 
@@ -200,6 +281,8 @@
                     </div>
                 </div>
             </div>
+
+           
             <!-- Footer End -->
         <!-- JavaScript Libraries -->
     <!-- JavaScript Libraries -->
