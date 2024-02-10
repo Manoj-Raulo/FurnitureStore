@@ -24,9 +24,9 @@ from furnapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/',views.Index,name='index'),
+    # path('index/',views.Index,name='index'),
     path('display/',views.Display,name='display'),
-    path('delete/<int:id>',views.Delete,name='delete'),
+    # path('delete/<int:id>',views.Delete,name='delete'),
     path('update/<int:id>',views.Update,name='update'),
     path('userindex/',views.UserIndex,name='userindex'),
     path('base/',views.UserBase,name='base'),
@@ -42,13 +42,32 @@ urlpatterns = [
     path('',views.LogIn,name='login'),
     path('logout/',views.Logout,name='logout'),
     path('preferpage/',views.Preferpage,name='preferpage'),
-    path('adminpanel/',views.AdminSup,name='adminpanel'),
+    path('adminpanel/',views.AdminPanel,name='adminpanel'),
+    path('adminlogin/',views.AdminLogin,name='adminlogin'),
+    path('adminlogout/',views.AdminLogout,name='adminlogout'),
     path('sellerpanel/',views.SellerPanel,name='sellerpanel'),
     path('sellerlogin/',views.SellerLogin,name='sellerlogin'), 
     path('selleregisteration/',views.SellerRegisteration,name='selleregisteration'),
     path('requestbrand/<int:id>',views.BrandDetails,name='requestbrand'),
     path('sellersignup/',views.SellerSignup,name='sellersignup'),
-    path('SellerProfile/',views.SellerProfile,name='SellerProfile')
+    path('SellerProfile/',views.SellerProfile,name='SellerProfile'),
+    path('Editsellerprofile/',views.SellerUpdate,name='Editsellerprofile'),
+    path('sellerlogout/',views.SellerLogout,name='sellerlogout'),
+    path('sellcategory/<str:pref>',views.SellerCategory,name='sellcategory'),
+    path('selpdetails/<int:id>',views.SelpDetails,name='selpdetails'),
+    path('Editslrproducts/<int:id>',views.EditProducts,name='Editslrproducts'),
+    path('deleteproduct/<int:id>',views.DeleteProducts,name='deleteproduct'),
+    path('addproducts/',views.AddProducts,name='addproducts'),
+    path('myprod/',views.MyProducts,name='myprod'),
+    path('sellersearch/',views.SellerSearch,name='sellersearch'),
+    path('adminsearch/',views.AdminSearch,name='adminsearch'),
+    path('furncategory/<str:pref>',views.FurnCategory,name='furncategory'),
+    path('furndetails/<int:id>',views.FurnDetails,name='furndetails'),
+    
+
+    
+
+
 
 
     

@@ -20,6 +20,8 @@ from django.conf import settings
 
 import uuid
 
+from django.urls import reverse
+
 
 # Create your views here.
 
@@ -36,13 +38,13 @@ def Display(request):
     data=Product.objects.all()
     return render(request,'admin/display.html',{"ddata":data})
 
-def Delete(request,id):
-    if request.method=="POST":
-        Product.objects.get(pk=id).delete()
+# def Delete(request,id):
+#     if request.method=="POST":
+#         Product.objects.get(pk=id).delete()
 
-        messages.success(request,"Product Deleted Successfully....")
+#         messages.success(request,"Product Deleted Successfully....")
 
-        return HttpResponseRedirect("/display/")
+#         return HttpResponseRedirect("/display/")
 
 def Update(request,id):
     if request.method=="POST":
@@ -241,12 +243,9 @@ def Preferpage(request):
     else:
         return HttpResponseRedirect('/')
 
-def AdminSup(request):
-    rdata=RegisterationRequest.objects.all().order_by('-id')[:3]
-    return render(request,'admin/AdminPanel.html',{'rdata':rdata})
 
 def SellerPanel(request):
-    if request.user.is_staff and request.user.is_authenticated:
+    if request.user.is_staff and request.user.is_authenticated and not  request.user.is_superuser:
         
         sellerdata=SellerDetails.objects.filter(seller_id=request.user)
         
@@ -256,7 +255,7 @@ def SellerPanel(request):
         
         return render(request,'admin/SellerPanel.html',{'sdata':sellerdata,'sname':userprofile})
     else:
-        return HttpResponse("please signup or login")
+        return HttpResponseRedirect("/sellerlogin/")
 
 def SellerRegisteration(request):
     if request.method == 'POST':
@@ -352,6 +351,233 @@ def SellerProfile(request):
     sellerdata=SellerDetails.objects.filter(seller_id=request.user)
     userprofile=request.user
     return render(request,'admin/SellerProfile.html',{'sdata':sellerdata,'sname':userprofile})
+
+
+def SellerUpdate(request):
+    if request.method == 'POST':
+        # Retrieve form data
+        bname = request.POST.get('bname')
+        shopaddress = request.POST.get('shopaddress')
+        email = request.POST.get('email')
+        contact = request.POST.get('contact')
+        branddesc = request.POST.get('branddesc')
+        brandlogo = request.FILES.get('brandlogo')
+
+        # Fetch the SellerDetails object
+        seller_details = SellerDetails.objects.filter(seller=request.user).first()
+        if seller_details:
+            # Update fields
+            seller_details.bname = bname
+            seller_details.shopaddress = shopaddress
+            seller_details.email = email
+            seller_details.contact = contact
+            seller_details.branddesc = branddesc
+            if brandlogo:
+                seller_details.brandlogo = brandlogo  # Update the brandlogo only if a new image is uploaded
+            # Save the updated object
+            seller_details.save()
+
+        return HttpResponseRedirect('/SellerProfile/')
+
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/sellerupdate.html', {'sdata': sellerdata, 'sname': userprofile})
+
+def SellerLogout(request):
+    logout(request)
+    return HttpResponseRedirect('/sellerlogin/')
+
+def SellerCategory(request,pref):
+
+    slcatproducts=Product.objects.filter(Q(seller=request.user) & Q(preference=pref))
+    
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/sellercategory.html', {'sdata': sellerdata, 'sname': userprofile,'cdata':slcatproducts,'pref':pref})
+
+def SelpDetails(request,id):
+    
+    slddata=Product.objects.filter(pk=id)
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/selpdetails.html', {'sdata': sellerdata, 'sname': userprofile,'slddata':slddata})
+
+def EditProducts(request,id):
+    if request.method=='POST':
+        pid=request.POST.get('pid')
+        pname=request.POST.get('pname')
+        category=request.POST.get('category')
+        preference=request.POST.get('preference')
+        size=request.POST.get('size')
+        material=request.POST.get('material')
+        finishtype=request.POST.get('finishtype')
+        dimension=request.POST.get('dimension')
+        colour=request.POST.get('colour')
+        brand=request.POST.get('brand')
+        features=request.POST.get('features')
+        desc=request.POST.get('desc')
+        price=request.POST.get('price')
+        weight=request.POST.get('weight')
+        stock=request.POST.get('stock')
+        img1=request.FILES.get('img1')
+        img2=request.FILES.get('img2')
+        img3=request.FILES.get('img3')
+        img4=request.FILES.get('img4')
+        img5=request.FILES.get('img5')
+        product_details = Product.objects.filter(pk=pid).first()
+        
+        if product_details:
+            product_details.pname=pname
+            product_details.category=category
+            product_details.preference=preference
+            product_details.size=size
+            product_details.material=material
+            product_details.finishtype=finishtype
+            product_details.dimension=dimension
+            product_details.colour=colour
+            product_details.brand=brand
+            product_details.features=features
+            product_details.desc=desc
+            product_details.price=price
+            product_details.weight=weight
+            product_details.stock=stock
+            if img1:
+                product_details.img1=img1
+            if img2:
+                product_details.img2=img2
+            if img3:
+                product_details.img3=img3
+            if img4:
+                product_details.img4=img4
+            if img5:
+                product_details.img5=img5
+            product_details.save()
+        return HttpResponseRedirect(reverse('selpdetails', args=(pid,)))
+        
+
+
+
+    pdata=Product.objects.filter(pk=id)
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/EditProducts.html', {'sdata': sellerdata, 'sname': userprofile,'pdata':pdata})
+
+def AddProducts(request):
+    if request.method=='POST':
+        pname=request.POST.get('pname')
+        category=request.POST.get('category')
+        preference=request.POST.get('preference')
+        size=request.POST.get('size')
+        material=request.POST.get('material')
+        finishtype=request.POST.get('finishtype')
+        dimension=request.POST.get('dimension')
+        colour=request.POST.get('colour')
+        brand=request.POST.get('brand')
+        features=request.POST.get('features')
+        desc=request.POST.get('desc')
+        price=request.POST.get('price')
+        weight=request.POST.get('weight')
+        stock=request.POST.get('stock')
+        img1=request.FILES.get('img1')
+        img2=request.FILES.get('img2')
+        img3=request.FILES.get('img3')
+        img4=request.FILES.get('img4')
+        img5=request.FILES.get('img5')
+        Product.objects.create(pname=pname,category=category,preference=preference,size=size,material=material,finishtype=finishtype,dimension=dimension,
+        colour=colour,brand=brand,features=features,desc=desc,price=price,weight=weight,stock=stock,img1=img1,img2=img2,img3=img3,img4=img4,img5=img5,seller=request.user)
+        return HttpResponse('Product Added Successfully')
+
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/addproducts.html', {'sdata': sellerdata, 'sname': userprofile})
+
+def MyProducts(request):
+    myproducts=Product.objects.filter(seller=request.user)
+
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/sellerproducts.html', {'sdata': sellerdata, 'sname': userprofile,'mpdata':myproducts})
+
+
+def SellerSearch(request):
+    try:
+        if request.method == "POST":
+            search = request.POST.get("search")
+            if search:
+                srdata = Product.objects.filter(Q(seller_id=request.user) & Q(pname__icontains=search))
+            
+        sellerdata = SellerDetails.objects.filter(seller=request.user)
+        userprofile = request.user    
+        return render(request, 'admin/sellersearch.html', {'srdata': srdata, 'sdata': sellerdata, 'sname': userprofile, 'search': search})
+    except:
+        return HttpResponseRedirect('/sellerpanel/')
+
+
+
+def DeleteProducts(request,id):
+    Product.objects.filter(pk=id).delete()
+    sellerdata = SellerDetails.objects.filter(seller=request.user)
+    userprofile = request.user
+    return render(request, 'admin/productdeleted.html', {'sdata': sellerdata, 'sname': userprofile})
+
+def AdminLogin(request):
+    if request.method == "POST":
+        username = request.POST.get("uname")
+        password = request.POST.get("pass1")
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None and user.is_superuser:
+            login(request,user)
+            return HttpResponseRedirect("/adminpanel/")
+    return render(request,'admin/AdminLogin.html')
+
+def AdminPanel(request):
+    if request.user.is_superuser and request.user.is_authenticated:
+        rdata=RegisterationRequest.objects.all().order_by('-id')[:3]
+        return render(request,'admin/AdminPanel.html',{'rdata':rdata})
+    else:
+        return HttpResponseRedirect('/adminlogin/')
+
+def AdminLogout(request):
+    logout(request)
+    return HttpResponseRedirect('/adminlogin/')
+
+def AdminSearch(request):
+    try:
+        if request.method == "POST":
+            search = request.POST.get("search")
+            if search:
+                srdata=Product.objects.filter(Q(category=search) | Q(pname__icontains=search) | Q(brand=search) | Q(desc__icontains=search) | Q(price__icontains=search))
+              
+        return render(request, 'admin/adminsearch.html', {'srdata': srdata,'search': search})
+    except:
+        return HttpResponseRedirect('/adminpanel/')
+
+def FurnCategory(request,pref):
+    furncatproducts=Product.objects.filter(preference=pref)
+    return render(request, 'admin/furncategory.html', {'fcdata':furncatproducts,'pref':pref})
+
+def FurnDetails(request,id):
+    
+    slddata=Product.objects.filter(pk=id)
+    return render(request, 'admin/furndetails.html', {'fddata':slddata})
+
+
+
+
+
+
+
+
+    
+
+        
+        
+
+   
+
+        
+    
 
 
 

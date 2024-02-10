@@ -1,0 +1,136 @@
+{% extends 'admin/SellerPanel.html' %}
+
+
+{% block title %}Seller Profile...{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    {% for i in pdata %}
+        
+    <form action="" method="post" name="fm" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+            <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="mt-2"><span class="text-primary">Prooduct Name:</span>
+        <input type="text" name="pname" class="form-control" value="{{i.pname}}"/></div>
+        <div class="mt-2"><span class="text-primary" >Category: </span>
+            <select id="cat" class="form-select" name="category" onchange="Start()">
+                <option value="{{ i.category }}" selected>{{ i.category }}</option>
+                {% if i.category != "Sofa" %}
+                    <option value="Sofa">Sofa</option>
+                {% endif %}
+                {% if i.category != "Bed" %}
+                    <option value="Bed">Bed</option>
+                {% endif %}
+                {% if i.category != "Dining Table" %}
+                    <option value="Dining Table">Dining Table</option>
+                {% endif %}
+                {% if i.category != "Wardrobe" %}
+                    <option value="Wardrobe">Wardrobe</option>
+                {% endif %}
+                {% if i.category != "Coffee Table" %}
+                    <option value="Coffee Table">Coffee Table</option>
+                {% endif %}
+                {% if i.category != "Office Chair" %}
+                    <option value="Office Chair">Office Chair</option>
+                {% endif %}
+                {% if i.category != "Mattress" %}
+                    <option value="Mattress">Mattress</option>
+                {% endif %}
+            </select></div>
+            <div class="mt-2">
+                <span class="text-primary">Preference:</span>
+                <select id="preference" name="preference" class="form-select">
+                    {% if i.preference == "Living" %}
+                        <option class="op" selected>Living</option>
+                    {% else %}
+                        <option class="op">Living</option>
+                    {% endif %}
+                    {% if i.preference == "Office" %}
+                        <option class="op" selected>Office</option>
+                    {% else %}
+                        <option class="op">Office</option>
+                    {% endif %}
+                    {% if i.preference == "Bedroom" %}
+                        <option class="op" selected>Bedroom</option>
+                    {% else %}
+                        <option class="op">Bedroom</option>
+                    {% endif %}
+                    {% if i.preference == "Dining" %}
+                        <option class="op" selected>Dining</option>
+                    {% else %}
+                        <option class="op">Dining</option>
+                    {% endif %}
+                </select>
+            </div>
+            
+            
+        
+        <div class="mt-2"><span class="text-primary">Size: </span><input type="text" name="size" class="form-control" value="{{i.size}}"/></div>
+        <div class="mt-2"><span class="text-primary">Material: </span><input type="text" name="material" class="form-control" value="{{i.material}}"/></div>
+        <div class="mt-2"><span class="text-primary">Finish Type: </span><input type="text" name="finishtype" class="form-control" value="{{i.finishtype}}"/></div>
+        <div class="mt-2"><span class="text-primary">Dimension:</span><input type="text" name="dimension" class="form-control" value="{{i.dimension}}"/></div>
+        <div class="mt-2"><span class="text-primary">Colour: </span><input type="text" name="colour" class="form-control" value="{{i.colour}}"/></div>
+        <div class="mt-2"><span class="text-primary">Brand: </span><input type="text" name="brand" class="form-control" value="{{i.brand}}"/></div>
+        <div class="mt-2"><span class="text-primary">Special Features: </span><input type="text" name="features" class="form-control" value="{{i.features}}"/></div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="mt-2"><span class="text-primary">description: </span><input type="desc" name="desc" class="form-control" value="{{i.desc}}"/></div>
+        <div class="mt-2"><span class="text-primary">Price: </span><input type="number" name="price" class="form-control" value="{{i.price}}" /></div>
+        <div class="mt-2"><span class="text-primary">Weight: </span><input type="text" name="weight" class="form-control" value="{{i.weight}}"/></div>
+        <div class="mt-2"><span class="text-primary">Stock: </span><input type="number" name="stock" class="form-control" value="{{i.stock}}"/></div>
+        <div class="mt-2"><span class="text-primary">Image1: </span><input type="file" name="img1" class="form-control" value="{{i.img1}}"/></div>
+        <div class="mt-2"><span class="text-primary">image2: </span><input type="file" name="img2" class="form-control" value="{{i.img2}}"/></div>
+        <div class="mt-2"><span class="text-primary">image3: </span><input type="file" name="img3" class="form-control" value="{{i.img3}}"/></div>
+        <div class="mt-2"><span class="text-primary">image4: </span><input type="file" name="img4" class="form-control" value="{{i.img4}}"/></div>
+        <div class="mt-2 mb-2"><span class="text-primary">image5: </span><input type="file" name="img5" class="form-control" value="{{i.img5}}"/></div>
+        <input type="number" value="{{i.id}}" name="pid" class="d-none">
+        <input type="submit" value="Update Product" class="btn btn-success mt-4" />
+    </div>
+    </div>
+    
+    </form>
+    {% endfor %}
+
+</div>
+
+
+
+
+<script>
+    function Start() {
+    var category = document.getElementById('cat').value;
+    console.log(category);
+
+    var data = [];
+    if (category === 'Sofa') {
+        data = ['Living', 'Office'];
+    } else if (category === 'Bed') {
+        data = ['Bedroom'];
+    } else if (category === 'Dining Table') {
+        data = ['Living', 'Dining'];
+    } else if (category === 'Wardrobe') {
+        data = ['Living', 'Bedroom'];
+    } else if (category === 'Coffee Table') {
+        data = ['Living', 'Office'];
+    } else if (category === 'Office Chair') {
+        data = ['Office'];
+    } else if (category === 'Mattress') {
+        data = ['Bedroom'];
+    }
+
+    var preferenceDropdown = document.getElementById('preference');
+    preferenceDropdown.innerHTML = ''; // Clear previous options
+
+    for (var i = 0; i < data.length; i++) {
+        var option = document.createElement('option');
+        option.value = data[i];
+        option.text = data[i];
+        preferenceDropdown.appendChild(option);
+    }
+}
+
+    </script>
+{% endblock %}

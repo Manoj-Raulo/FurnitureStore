@@ -1,0 +1,43 @@
+{% extends 'admin/SellerPanel.html' %}
+
+
+{% block title %}Seller Profile...{% endblock %}
+
+{% block content %}
+
+<div class="container mb-5 mt-5">
+    <h1>Update Your Brand Details</h1>
+    <hr>
+    {% for i in sdata %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="row mt-5">
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="mt-2"><span class="text-primary">Brand Name :</span> <input type="text" value="{{i.bname}}" class="form-control" name="bname"></div>
+            <div class="mt-2"><span class="text-primary">Shop Address :</span> <input type="text" value="{{i.shopaddress}}" class="form-control" name="shopaddress"></div>
+            <div class="mt-2"><span class="text-primary">E-mail :</span> <input type="email" value="{{i.email}}" class="form-control" name="email"></div>
+            <div class="mt-2"><span class="text-primary">Contact :</span> <input type="phone" value="{{i.contact}}" class="form-control" name="contact"></div>
+            <div class="mt-2 mb-2"><span class="text-primary">Brand Description :</span> <input type="desc" value="{{i.branddesc}}" class="form-control" name="branddesc"></div>
+            
+
+        </div>
+    
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="text-center"> 
+                <img src="{{ i.brandlogo.url }}" alt="" class="img-fluid" style="max-width: 100%; height: auto; border: 5px solid #007bff; border-radius: 50%; max-height: 295px;">
+            </div>
+            <div class="mt-3"> 
+                <input type="file" class="form-control" name="brandlogo">
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <input type="submit" class="btn btn-primary mt-md-5 mt-sm-3 mt-3 mx-auto d-block" value="Update Details">
+    </div>
+    </form>
+    {% endfor %}
+</div>
+
+{% endblock %}

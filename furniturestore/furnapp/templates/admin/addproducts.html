@@ -1,0 +1,107 @@
+{% extends 'admin/SellerPanel.html' %}
+
+
+
+
+{% block title %}Seller Profile...{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1>Adding <span class="text-success">New Product</span></h1>
+    <hr>
+        
+    <form action="" method="post" name="fm" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+            <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="mt-2"><span class="text-primary">Prooduct Name:</span>
+            <input type="text" name="pname" class="form-control" /></div>
+            <div class="mt-2"><span class="text-primary" >Category: </span>
+            <select id="cat" class="form-select" name="category" onchange="Start()">
+            <option>Select Category</option>
+            <option value="Sofa" >Sofa</option>
+            <option value="Bed">Bed</option>
+            <option value="Dining Table" >Dining Table</option>
+            <option value="Wardrobe">Wardrobe</option>
+            <option value="Coffee Table" >Coffee Table</option>
+            <option value="Office Chair">Office Chair</option>
+            <option value="Mattress" >Mattress</option>
+            
+        </select></div>
+        <div class="mt-2">
+            <span class="text-primary">Preference:</span>
+            <select id="preference" name="preference" class="form-select">
+            <option >Select below Preferences</option>
+            <option class="op"></option>
+            <option class="op"></option>
+            <option class="op"></option>
+            <option class="op"></option>
+            
+        </select></div>
+        <div class="mt-2"><span class="text-primary">Size: </span><input type="text" name="size" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Material: </span><input type="text" name="material" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Finish Type: </span><input type="text" name="finishtype" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Dimension:</span><input type="text" name="dimension" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Colour: </span><input type="text" name="colour" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Brand: </span><input type="text" name="brand" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Special Features: </span><input type="text" name="features" class="form-control"/></div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="mt-2"><span class="text-primary">description: </span><input type="desc" name="desc" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Price: </span><input type="number" name="price" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Weight: </span><input type="text" name="weight" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Stock: </span><input type="number" name="stock" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">Image1: </span><input type="file" name="img1" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">image2: </span><input type="file" name="img2" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">image3: </span><input type="file" name="img3" class="form-control"/></div>
+        <div class="mt-2"><span class="text-primary">image4: </span><input type="file" name="img4" class="form-control"/></div>
+        <div class="mt-2 mb-2"><span class="text-primary">image5: </span><input type="file" name="img5" class="form-control"/></div>
+        <input type="submit" value="Add Product" class="btn btn-success mt-4" />
+    </div>
+    </div>
+    
+    </form>
+
+</div>
+
+
+
+
+<script>
+    function Start() {
+    var category = document.getElementById('cat').value;
+    console.log(category);
+
+    var data = [];
+    if (category === 'Sofa') {
+        data = ['Living', 'Office'];
+    } else if (category === 'Bed') {
+        data = ['Bedroom'];
+    } else if (category === 'Dining Table') {
+        data = ['Living', 'Dining'];
+    } else if (category === 'Wardrobe') {
+        data = ['Living', 'Bedroom'];
+    } else if (category === 'Coffee Table') {
+        data = ['Living', 'Office'];
+    } else if (category === 'Office Chair') {
+        data = ['Office'];
+    } else if (category === 'Mattress') {
+        data = ['Bedroom'];
+    }
+
+    var preferenceDropdown = document.getElementById('preference');
+    preferenceDropdown.innerHTML = ''; // Clear previous options
+
+    for (var i = 0; i < data.length; i++) {
+        var option = document.createElement('option');
+        option.value = data[i];
+        option.text = data[i];
+        preferenceDropdown.appendChild(option);
+    }
+}
+
+    </script>
+
+{% endblock %}

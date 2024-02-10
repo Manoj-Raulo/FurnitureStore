@@ -1,0 +1,51 @@
+{% extends 'admin/AdminPanel.html' %}
+
+
+{% block title %}Searching....{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-left rounded p-4">
+        {% if srdata %}
+        <div class="table-responsive">
+            <h4 class="mb-2" style="font-style:italic ;">Showing Search results for<span style="color: #4D4855;font-style: italic;"> "{{search}}"</span></h4>
+            
+            <hr>
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> -->
+                        <th scope="col">Produc Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in srdata %}
+                    <tr>
+                        <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                        <td>{{i.pname}}</td>
+                        <td>{{i.category}}</td>
+                        <td>{{i.price}}</td>
+                        <td>{{i.size}}</td>
+                        <td><img src="{{i.img1.url}}" alt="" style="width: 100px;height: 100px;"></td>
+                        <td><a class="btn btn-sm btn-dark" href="{% url 'furndetails' i.id %}">Details</a></td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <h1 class="text-primary">Not Such Article Found</h1>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}

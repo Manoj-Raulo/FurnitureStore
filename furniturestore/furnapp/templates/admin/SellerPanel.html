@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}Admin - Dashboard | MultiShop{% endblock %}</title>
+    <title>{% block title %}Admin - Dashboard | WoodMagic Furnitures{% endblock %}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Google Web Fonts -->
@@ -51,35 +51,27 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
+                    <a href="{% url 'sellerpanel' %}" class="nav-item nav-link active"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-couch me-2"></i>Products</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="button.html" class="dropdown-item">Living</a>
-                            <a href="typography.html" class="dropdown-item">Dining</a>
-                            <a href="element.html" class="dropdown-item">Bedroom</a>
-                            <a href="element.html" class="dropdown-item">Office</a>
+                            <a href="{% url 'sellcategory' 'Living' %}" class="dropdown-item">Living</a>
+                            <a href="{% url 'sellcategory' 'Dining' %}" class="dropdown-item">Dining</a>
+                            <a href="{% url 'sellcategory' 'Bedroom' %}" class="dropdown-item">Bedroom</a>
+                            <a href="{% url 'sellcategory' 'Office' %}" class="dropdown-item">Office</a>
+                            <a href="{% url 'myprod' %}" class="dropdown-item">All Products</a>
                         </div>
                     </div>
                     
                         
                         <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                         <a href="form.html" class="nav-item nav-link"><i class="fa-solid fa-star me-2"></i>Reviews</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-regular fa-square-check me-2"></i>Operations</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Add Products</a>
-                            <a href="signup.html" class="dropdown-item">Update Products</a>
-                            <a href="404.html" class="dropdown-item">Delete Products</a>
-
-                        
-                            
-                        </div>
-                    </div>
+                        <a href="{% url 'addproducts' %}" class="nav-item nav-link"><i class="fa-solid fa-plus me-2"></i>Add Products</a>
+                    
                     <div>
                         {% for i in  sdata %}
                         <a href="form.html" class="nav-item nav-link"><img src='{{ i.brandlogo.url }}' style="width:100% ;height: 100%;border-radius: 100px;"></a>
-                        <div class="text-center"><h3>seller</h3></div>
+                        <div class="text-center"><h3>{{i.bname}}</h3></div>
                         {% endfor %}
                                                 
                     </div>
@@ -98,15 +90,17 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
+                <form class="d-none d-md-flex ms-4" action="{% url 'sellersearch' %}" method="post">
+                    {% csrf_token %}
+                    <input class="form-control border-0" type="search" name="search" placeholder="Search products here">
+                    <button class="btn btn-primary ms-2" type="submit">Search</button>
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                            <span class="d-none d-lg-inline-flex">Notification</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
@@ -135,9 +129,8 @@
                             <span class="d-none d-lg-inline-flex">{{sname}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{% url 'SellerProfile' %}" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="{% url 'SellerProfile' %}" class="dropdown-item">My Profile<i class="fa-solid fa-user-tie ms-2"></i></a>
+                            <a href="{% url 'sellerlogout' %}" class="dropdown-item">Log Out<i class="fa-solid fa-right-from-bracket ms-2"></i></a>
                         </div>
                     </div>
                 </div>
