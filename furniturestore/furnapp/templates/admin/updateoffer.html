@@ -1,0 +1,88 @@
+{% extends 'admin/AdminPanel.html' %}
+
+
+{% block title %}Seller Profile...{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h1 class="text-success">Update Offers</h1>
+    <hr>
+    {% for i in odata %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                <h3 class="text-center">First Slide</h3>
+                <div class="text-center"> 
+                    <img src="{{ i.offer1.url }}" alt="" class="img-fluid mt-2" style="width: 70%; height: auto; border: 2px solid black; max-height: 350pxpx;">
+                </div>
+                <div class="mt-3"> 
+                    <input type="file" class="form-control mt-2" name="offer1">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                <h3 class="text-center">Second Slide</h3>
+                <div class="text-center"> 
+                    <img src="{{ i.offer2.url }}" alt="" class="img-fluid mt-2" style="width: 70%; height: auto; border: 2px solid black; max-height: 350pxpx;">
+                </div>
+                <div class="mt-3"> 
+                    <input type="file" class="form-control mt-2" name="offer2">
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                <h3 class="text-center">Third Slide</h3>
+                <div class="text-center"> 
+                    <img src="{{ i.offer3.url }}" alt="" class="img-fluid mt-2" style="width: 70%; height: auto; border: 2px solid black; max-height: 350pxpx;">
+                </div>
+                <div class="mt-3"> 
+                    <input type="file" class="form-control mt-2 mt-2" name="offer3">
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                <h3 class="text-center">Forth Slide</h3>
+                <div class="text-center"> 
+                    <img src="{{ i.offer4.url }}" alt="" class="img-fluid mt-2" style="width: 70%; height: auto; border: 2px solid black; max-height: 350pxpx;">
+                </div>
+                <div class="mt-3"> 
+                    <input type="file" class="form-control mt-2" name="offer4">
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                <h3 class="text-center">Fifth Slide</h3>
+                <div class="text-center"> 
+                    <img src="{{ i.offer5.url }}" alt="" class="img-fluid mt-2" style="width: 70%; height: auto; border: 2px solid black; max-height: 350pxpx;">
+                </div>
+                <div class="mt-3"> 
+                    <input type="file" class="form-control mt-2" name="offer5">
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+           
+            <input type="submit" class="btn btn-primary mt-md-5 mt-sm-3 mt-3 mx-auto d-block" value="Update Offers">
+        </div>
+        
+    </form>
+    {% endfor %}
+</div>
+
+{% endblock %}

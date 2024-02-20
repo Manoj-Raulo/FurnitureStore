@@ -1,0 +1,73 @@
+{% extends 'user/base.html' %}
+
+{% block title %} Preorder...... {% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <div class="row">
+        
+        <div class="col-lg-7 col-md-7 col-sm-12">
+            <h3>Products Selected:</h3>
+            <hr>
+            {% for i in pdata %}
+            
+            <div class="row">
+                
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <img src="{{i.img1.url}}" height="200px" width="100%">
+
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-12">
+                    <p>{{i.pname}}</p>
+                    <p><sup><i class="fa-solid fa-indian-rupee-sign text-success"></i></sup> <span class="ms-1 fs-4">{{i.price}}</span></p>
+                    
+                    
+                    
+                    
+                    
+
+
+                </div>
+                
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        
+        <div class="col-lg-5 col-md-5 col-sm-5">
+            <h3>Item Deliver To:</h3>
+            <hr>
+            {% for i in adata %}
+              <div>
+                
+                <p>
+                    <span>{{i.flat}}</span>
+                    <span>{{i.landmark}}</span>
+                    <span>{{i.city}}</span>
+                    <span>{{i.pincode}}</span>
+                    <span>{{i.state}}</span>
+                </p>
+                <h5>Contact : {{i.contact}}</h5>
+                <h5>Alternate contact : {{i.contactA}}</h5>
+          
+              </div>
+              <p>
+                <span class="text-danger">Estimated Delivery: </span><span class="text-dark">{{date}}</span>
+                <a href="{% url 'alladdress' %}" class="text-primary ms-4">Change Address</a>
+              </p>
+
+              {% endfor %}
+              <hr>
+              <span class="ms-1 fs-3">Total Amount({{count}} Item):-</span><i class="fa-solid fa-indian-rupee-sign text-success fs-3 ms-3"></i><span class="ms-2 fs-3">{{camt}}</span>
+        </div>
+        
+    
+        
+    </div>
+    <a href="{% url 'cartpay' aid %}" class="btn btn-warning">Proceed to Pay</a>
+</div>
+
+</div>
+
+{% endblock %}

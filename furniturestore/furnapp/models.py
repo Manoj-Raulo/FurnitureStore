@@ -47,6 +47,28 @@ class Save(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
+class Address(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    name = models.CharField(max_length=200,null=True)
+    flat = models.CharField(max_length=300,null=True)
+    area = models.CharField(max_length=200,null=True)
+    landmark = models.CharField(max_length=200,null=True)
+    city = models.CharField(max_length=200,null=True)
+    state = models.CharField(max_length=100,null=True)
+    pincode = models.IntegerField(null=True)
+    contact= models.BigIntegerField(null=True)
+    contactA= models.BigIntegerField(null=True)
+
+class Order(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True)
+    address = models.ForeignKey(Address,on_delete=models.CASCADE,null=True)
+    order_id = models.CharField(max_length=100,null=True)
+    order_date = models.DateField(null=True)
+    Estimated_delivery_date = models.DateField(null=True)
+
+
+
 class RegisterationRequest(models.Model):
     bname=models.CharField(max_length=100,null=True)
     email = models.EmailField()
@@ -63,6 +85,15 @@ class SellerDetails(models.Model):
     contact=models.BigIntegerField(null=True)
     shopaddress=models.CharField(max_length=300,null=True)
     branddesc=models.CharField(max_length=500,null=True)
+
+class UserDetails(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    profileimage=models.ImageField(upload_to='brandlogo',null=True)
+    fullname=models.CharField(max_length=100,null=True)
+    contact=models.BigIntegerField(null=True)
+    permanantaddress=models.CharField(max_length=300,null=True)
+    
+    
 
     
 

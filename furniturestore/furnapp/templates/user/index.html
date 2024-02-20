@@ -6,16 +6,7 @@
 
 {% block content %}
 
-<!-- {% if messages %}
- {% for message in messages %}
-<script>
-  alert('{{message}}')
-</script>
 
-{% endfor %} 
-
-
-{% endif %} -->
 <div class="container">
   <div id="carouselExampleIndicators" class="carousel slide mt-4" data-bs-ride="carousel">
     <div class="carousel-indicators">
@@ -107,7 +98,7 @@
 
 <!-- Best sellers start from here -->
 <div class="container mt-5">
-  <h5 class="text-center fw-bold display-3 my-4">Our<span class="text-warning">Bestsellers</span></h5>
+  <h5 class="text-center fw-bold display-3 my-4">Our <span class="text-warning">Bestsellers</span></h5>
 
   <div class="owl-carousel owl-theme" height="500px">
     {% for i in bdata %}

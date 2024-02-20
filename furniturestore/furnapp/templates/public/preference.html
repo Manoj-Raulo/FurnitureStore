@@ -1,0 +1,34 @@
+{% extends 'public/base.html' %}
+
+{% block title %}Furniture for...{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h1 class="text-md-left fw-normal display-5 my-2">Furniture for <span class="text-danger">{{pf}}</span></h1>
+    <hr>
+    <div class="row">
+        {% for i in pfdata %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-2 mb-2 px-2">
+            <a href="{% url 'productdetails' i.id i.category i.brand %}">
+                <div class="shadow border" style="height: 480px; background-color: white; border-radius: 5px;">
+                    <figure>
+                        <img src="{{ i.img1.url }}" class="img-fluid" style="height: 250px; width: 100%; border-radius: 5px 5px 0 0;">
+                    </figure>
+                    <figcaption class="ms-2">
+                        <h4 style="color: #1E453E;">{{ i.brand }}</h4>
+                        <h6 class="text-secondary ellipsis">{{ i.pname }}</h6>
+                        <h4>
+                            <i class="fa-solid fa-indian-rupee-sign text-success"></i>
+                            <span class="ms-1">{{ i.price }}</span>
+                        </h4>
+                        <p class="read-more">Read More</p>
+                    </figcaption>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

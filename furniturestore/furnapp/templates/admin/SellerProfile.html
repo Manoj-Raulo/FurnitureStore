@@ -41,8 +41,14 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="mb-5 ms-5">
+                {% if i.brandlogo %}
                 <img src="{{i.brandlogo.url}}" alt="" style="width: 300px;height: 300px;border: 5px solid black;border-radius: 400px;">
-            </div>
+                {% else %}
+                <img src="{% static 'images/Default-Profile.webp' %}" alt="" style="width: 300px;height: 300px;border: 5px solid black;border-radius: 400px;">
+                {% endif %}
+                <h1 class="text-primary mt-3">{{i.bname}}</h1>
+              </div>
+              
             
         </div>
         {% endfor %}

@@ -64,14 +64,20 @@
                     </div>
                     
                         
-                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                        <a href="form.html" class="nav-item nav-link"><i class="fa-solid fa-star me-2"></i>Reviews</a>
+                        <a href="#" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
+                        <a href="#" class="nav-item nav-link"><i class="fa-solid fa-star me-2"></i>Reviews</a>
                         <a href="{% url 'addproducts' %}" class="nav-item nav-link"><i class="fa-solid fa-plus me-2"></i>Add Products</a>
                     
                     <div>
+                        
                         {% for i in  sdata %}
-                        <a href="form.html" class="nav-item nav-link"><img src='{{ i.brandlogo.url }}' style="width:100% ;height: 100%;border-radius: 100px;"></a>
-                        <div class="text-center"><h3>{{i.bname}}</h3></div>
+                        {% if i.brandlogo %}
+                        <a href="#" class="nav-item nav-link"><img src='{{ i.brandlogo.url }}' style="width:100% ;height: 100%;border-radius: 100px;"></a>
+                        {% else %}
+                        <a href="#" class="nav-item nav-link"><img src="{% static 'images/Default-Profile.webp' %}" style="width:100% ;height: 100%;border-radius: 100px;"></a>
+                        {% endif %}
+                        <div class="text-center mt-3"><h3>{{i.bname}}</h3></div>
+                        
                         {% endfor %}
                                                 
                     </div>
@@ -124,7 +130,11 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             {% for i in  sdata %}
+                            {% if i.brandlogo %}
                             <img class="rounded-circle me-lg-2" src="{{i.brandlogo.url}}" alt="" style="width: 40px; height: 40px;">
+                            {% else %}
+                            <img class="rounded-circle me-lg-2" src="{% static 'images/Default-Profile.webp' %}" alt="" style="width: 40px; height: 40px;">
+                            {% endif %}
                             {% endfor %}
                             <span class="d-none d-lg-inline-flex">{{sname}}</span>
                         </a>
@@ -144,7 +154,7 @@
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Your Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0"><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1"></i>1234</h6>
                             </div>
                         </div>
                     </div>
@@ -153,7 +163,7 @@
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Your Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0"><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1"></i>1234</h6>
                             </div>
                         </div>
                     </div>
@@ -162,7 +172,7 @@
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Today's Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0"><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1"></i>1234</h6>
                             </div>
                         </div>
                     </div>
@@ -171,7 +181,7 @@
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Your Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0"><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1"></i>1234</h6>
                             </div>
                         </div>
                     </div>
@@ -204,9 +214,36 @@
                                 <tr>
                                     <!-- <td><input class="form-check-input" type="checkbox"></td> -->
                                     <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
+                                    <td>123</td>
                                     <td>Jhon Doe</td>
-                                    <td>$123</td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1">123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>123</td>
+                                    <td>Jhon Doe</td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1">123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>123</td>
+                                    <td>Jhon Doe</td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1">123</td>
+                                    <td>Paid</td>
+                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
+                                    <td>01 Jan 2045</td>
+                                    <td>123</td>
+                                    <td>Jhon Doe</td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1">123</td>
                                     <td>Paid</td>
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
                                 </tr>
@@ -215,34 +252,7 @@
                                     <td>01 Jan 2045</td>
                                     <td>INV-0123</td>
                                     <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <!-- <td><input class="form-check-input" type="checkbox"></td> -->
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
+                                    <td><i class="fa-solid fa-indian-rupee-sign text-dark fs-6 me-1">123</td>
                                     <td>Paid</td>
                                     <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
                                 </tr>

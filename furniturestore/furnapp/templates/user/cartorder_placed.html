@@ -1,0 +1,46 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %} Order Placed...... {% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 text-center">
+
+            <img src="{% static 'images/orderplacex.webp' %}" alt="" style="width: 300px;height: 300px; display: inline-block;">
+            <h2 class="text-success mt-5">Order Placed......<i class="fa-solid fa-circle-check"></i></h2>
+              <h3 class="text-dark mt-5">Your Order will Deliver by {{date}} On this Address</h3>
+              {% for i in adata %}
+                <div class="text-secondary">
+                  
+                  <p>
+                      <span>{{i.flat}}</span>
+                      <span>{{i.landmark}}</span>
+                      <span>{{i.city}}</span>
+                      <span>{{i.pincode}}</span>
+                      <span>{{i.state}}</span>
+                  </p>
+                  
+            
+                </div>
+                
+    
+                <div>
+        
+    </div>
+    
+                {% endfor %}
+              
+          </div>
+        
+        
+    </div>
+</div>
+
+
+
+{% endblock %}
+

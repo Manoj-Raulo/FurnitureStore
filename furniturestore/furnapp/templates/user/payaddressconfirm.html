@@ -1,0 +1,52 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block title %} Adiing new Address...... {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-12 text-center">
+
+        <img src="{% static 'images/payment.webp' %}" alt="" style="width: 300px;height: 300px; display: inline-block;">
+        <h4 class="text-success mt-4">Payment Successfull of <span class="text-dark fs-4"> <i class="fa-solid fa-indian-rupee-sign ms-2"></i> {{payment}}</span></h4>
+          <h3 class="text-danger mt-5">Are you Sure Your order to be Deliver On this Address ?</h3>
+          {% for i in adata %}
+            <div>
+              
+              <p>
+                  <span>{{i.flat}}</span>
+                  <span>{{i.landmark}}</span>
+                  <span>{{i.city}}</span>
+                  <span>{{i.pincode}}</span>
+                  <span>{{i.state}}</span>
+              </p>
+              
+        
+            </div>
+            
+
+            <div>
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'payaddressconfirm' i.id pid %}" class="btn btn-success d-block text-center">Yes <i class="fa-solid fa-check ms-2"></i></a>
+        </div>
+        <div class="col">
+            <a href="{% url 'editadd' i.id pid %}" class="btn btn-primary d-block text-center">Edit<i class="fa-solid fa-pen-to-square ms-2"></i></a>
+        </div>
+    </div>
+</div>
+
+            {% endfor %}
+          
+      </div>
+      
+  </div>
+</div>
+
+
+
+
+{% endblock %}

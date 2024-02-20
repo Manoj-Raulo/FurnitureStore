@@ -38,8 +38,54 @@ urlpatterns = [
     path('movecart/',views.MoveCart,name='movecart'),
     path('savedel/<int:id>',views.SaveDelete,name='savedel'),
     path('search/',views.ComponentSearch,name='search'),
+    path('cartaddress/',views.CartAddress,name='cartaddress'),
+    path('deleteaddress/<int:id>',views.DeleteAddress,name='deleteaddress'),
+    path('cartpreorder/<int:aid>',views.CartPreorder,name='cartpreorder'),
+    path('alladdress/',views.AllAddress,name='alladdress'),
+    path('updateaddress/<int:aid>',views.UpdateAddress,name='updateaddress'),
+    path('addnewaddress/',views.AddnewAddress,name='addnewaddress'),
+    path('cartpay/<int:aid>',views.CartPayment,name='cartpay'),
+    path('cartorderconfirm/<int:aid>/<str:payment>',views.CartOrderConfirm,name='cartorderconfirm'),
+    path('addressconfirm/<int:aid>',views.AddressConfirm,name='addressconfirm'),
+    path('address/<int:pid>/<str:amt>',views.PayAddress,name='address'),
+    path('preorder/<int:aid>/<int:pid>/<str:bamt>',views.Preorder,name='preorder'),
+    path('pay/<int:aid>/<int:pid>',views.Payment,name='pay'),
+    path('orderconfirm/<int:aid>/<int:pid>/<str:payment>',views.Orderconfirm,name='orderconfirm'),
+    path('payaddressconfirm/<int:aid>/<int:pid>',views.PayAddressConfirm,name='payaddressconfirm'),
+    path('editadd/<int:aid>/<int:pid>',views.EditAddress,name='editadd'),
+    path('carteditadd/<int:aid>/<str:payment>',views.CartEditAddress,name='carteditadd'),
+    
+    path('publicbase',views.PublicBase,name='publicbase'),
+    path('',views.PublicIndex,name='publicindex'),
+    path('usersearch/',views.PublicSearch,name='usersearch'),
+    path('publicproducts/',views.PublicProducts,name='publicproducts'),
+    path('productdetails/<int:id>/<str:category>/<str:brand>',views.ProductDetails,name='productdetails'),
+    path('publicpreferpage/',views.PublicPrefer,name='publicpreferpage'),
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+
+
+
+
+
+
+    path('editprofile/<int:id>',views.EditProfile,name='editprofile'),
+    path('addprodetails/',views.AddProfile,name='addprodetails'),
+    path('userprofile/',views.UserProfile,name='userprofile'),
     path('signup/',views.SignUp,name='signup'),
-    path('',views.LogIn,name='login'),
+    path('login/',views.LogIn,name='login'),
     path('logout/',views.Logout,name='logout'),
     path('preferpage/',views.Preferpage,name='preferpage'),
     path('adminpanel/',views.AdminPanel,name='adminpanel'),
@@ -63,6 +109,11 @@ urlpatterns = [
     path('adminsearch/',views.AdminSearch,name='adminsearch'),
     path('furncategory/<str:pref>',views.FurnCategory,name='furncategory'),
     path('furndetails/<int:id>',views.FurnDetails,name='furndetails'),
+    path('Editfurnproducts/<int:id>',views.EditFurnproducts,name='Editfurnproducts'),
+    path('allprods/',views.AllFurnitures,name='allprods'),
+    path('deletefurniture/<int:id>',views.DeleteFurniture,name='deletefurniture'),
+    path('adminprofile/',views.AdminProfile,name='adminprofile'),
+    path('updateoffers/<int:id>',views.UpdateOffers,name='updateoffers')
     
 
     
@@ -87,3 +138,5 @@ urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.MEDIA2_URL,document_root=settings.MEDIA2_ROOT)
 
 urlpatterns += static(settings.MEDIA3_URL,document_root=settings.MEDIA3_ROOT)
+
+urlpatterns += static(settings.MEDIA4_URL,document_root=settings.MEDIA4_ROOT)

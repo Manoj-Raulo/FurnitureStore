@@ -1,0 +1,89 @@
+{% extends 'user/base.html' %}
+
+{% block title %} Address...... {% endblock %}
+
+{% block content %}  
+
+{% if messages %}
+ {% for message in messages %}
+<script>
+  alert('{{message}}')
+</script>
+
+{% endfor %} 
+
+
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row">
+        
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            
+            <h3 class="mt-2">Saved Delivery Addresses:- </h3>
+            <hr>
+            {% if adata %}
+            {% for i in adata %}
+            
+            <div class="shadow border mt-2">
+              <div class="ms-2">
+                <h5>Name: {{i.name}}</h5>
+                <p>
+                    <span>{{i.flat}}</span>
+                    <span>{{i.landmark}}</span>
+                    <span>{{i.city}}</span>
+                    <span>{{i.state}}</span>
+                    <span>{{i.pincode}}</span>
+
+                </p>
+                <h5>Contact : {{i.contact}}</h5>
+                <h5>Alternate Contact : {{i.contactA}}</h5>
+                <a href="{% url 'cartpreorder' i.id %}" class="btn btn-warning fs-6 mb-2">Continue with this Address</a>
+                <a href="{% url 'deleteaddress' i.id %}" class="btn btn-danger fs-6 mb-2 ms-2">Remove This Address</a>
+            </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h5 class="text-primary text-center">Delivery Address not added yet </h5>
+            {% endif %}
+            <hr>
+            <a href="{% url 'addnewaddress' %}" class="btn btn-dark ms-2">Add New Address <i class="fa-solid fa-plus ms-2"></i></a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 mt-2">
+            <div>
+            <h3>Order Summary:-</h3>
+            <hr>
+            <table class="table">
+                <tr>
+                  <td>Total Item</td>
+                  <td style="color: #4D4855;">{{count}} Item</td>
+                </tr>
+                <tr>
+                    <td>Shipping Charges</td>
+                    <td style="color: #4D4855;"><span class="fs-6">0.00<i class="fa-solid fa-indian-rupee-sign text-success fs-6 ms-1"></i> </span></td>
+                </tr>
+                <tr>
+                    <td class="text-danger fs-3">Total Amount</td>
+                    <td style="color: #4D4855;"><sup><i class="fa-solid fa-indian-rupee-sign text-success fs-6"></i></sup> <span class="fs-3">{{camt}}</span></td>
+                </tr>
+
+            </table>
+            <hr>
+            </div>
+            
+
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
